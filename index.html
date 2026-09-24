@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#28bdf2">
+  <meta name="description" content="元気なぷくとのんびり屋のもちと一緒に、1ページずつ山を歩くデジタル絵本です。">
+  <title>ぷくともちの やまあるき</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect rx='15' width='64' height='64' fill='%2328bdf2'/%3E%3Cpath d='M5 52 25 20l11 18 8-12 15 26Z' fill='%237fd34e' stroke='%231c285c' stroke-width='4' stroke-linejoin='round'/%3E%3Ccircle cx='49' cy='14' r='7' fill='%23ffe05d'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css?v=storybook-1">
+</head>
+<body>
+  <a class="skip-link" href="#book-controls">ページ送りへ移動</a>
+  <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="false" aria-label="山の音をオンにする">
+    <span aria-hidden="true">♫</span><b>おと OFF</b>
+  </button>
+
+  <div class="book-stage" id="book-app">
+    <main class="storybook" aria-label="デジタル絵本 ぷくともちの やまあるき">
+      <div class="book-viewport" id="book-viewport">
+        <article class="book-page book-page--cover is-active" data-page-id="cover" data-scene="departure" aria-hidden="false">
+          <img class="cover-art" src="assets/hero.jpg" alt="青空と山々のなか、ぷくともちが山道を歩いている">
+          <div class="cover-shade" aria-hidden="true"></div>
+          <span class="floating-cloud cloud-one" aria-hidden="true">☁</span>
+          <span class="floating-cloud cloud-two" aria-hidden="true">☁</span>
+          <span class="flying-birds" aria-hidden="true">⌁　⌁</span>
+          <div class="cover-copy">
+            <p class="cover-eyebrow"><span>ぷく</span><i>と</i><span>もち</span><i>の</i></p>
+            <h1 data-page-title tabindex="-1">やまあるき</h1>
+            <p>ふたりと いっしょに、<br>やまの てっぺんへ。</p>
+            <button class="wood-button" type="button" data-go-next>ほんを ひらく <span aria-hidden="true">➜</span></button>
+          </div>
+          <p class="swipe-hint" aria-hidden="true">スワイプでも めくれるよ　→</p>
+        </article>
+
+        <article class="book-page book-page--characters" data-page-id="characters" data-scene="departure" aria-hidden="true" inert>
+          <h2 class="sr-only" data-page-title tabindex="-1">ぷくともちの紹介</h2>
+          <div class="character-spread">
+            <button class="character-leaf puku-card" type="button" data-character="puku" aria-label="ぷくのポーズを変える">
+              <span class="character-tag">せんとう！</span>
+              <span class="character-portrait">
+                <img src="assets/puku-1.png" alt="元気に手を振るぷく" data-character-image>
+                <span class="click-speech" data-character-speech aria-live="polite">いくぞー！</span>
+              </span>
+              <span class="character-copy">
+                <strong>ぷく <small>PUKU</small></strong>
+                <span>げんき・くいしんぼう<br>どんどん先へ行く はっけん名人</span>
+                <em data-character-quote>「いくぞー！」</em>
+                <small class="tap-hint">さわると へんしん！ ↻</small>
+              </span>
+            </button>
+            <button class="character-leaf mochi-card" type="button" data-character="mochi" aria-label="もちのポーズを変える">
+              <span class="character-tag">ひとやすみ</span>
+              <span class="character-portrait">
+                <img src="assets/mochi-1.png" alt="のんびり立っているもち" data-character-image>
+                <span class="sleep-bubble" aria-hidden="true">Z z</span>
+                <span class="click-speech" data-character-speech aria-live="polite">ゆっくりね</span>
+              </span>
+              <span class="character-copy">
+                <strong>もち <small>MOCHI</small></strong>
+                <span>のんびり・休憩ずき<br>景色を見ると すぐ座る</span>
+                <em data-character-quote>「ゆっくりね」</em>
+                <small class="tap-hint">さわると へんしん！ ↻</small>
+              </span>
+            </button>
+          </div>
+        </article>
+
+        <article class="book-page book-page--story" data-page-id="departure" data-scene="departure" aria-hidden="true" inert>
+          <div class="book-spread">
+            <div class="illustration-leaf"><img src="assets/story-1.jpg" alt="木の道しるべから元気に出発するぷくともち" loading="lazy"><button class="scene-touch" type="button" data-effect="grass" aria-label="草を揺らす">✦</button></div>
+            <div class="story-leaf"><span class="chapter-number">01</span><p class="scene-label">しゅっぱつ</p><h2 data-page-title tabindex="-1">「こっち こっち！」</h2><p>ぷくは地図をしまうより先に、<br>もう歩きはじめました。</p><p class="character-note"><b>ぷく</b>「なにか ありそう！」<br><b>もち</b>「ゆっくり いこうよ〜」</p></div>
+          </div>
+        </article>
+
+        <article class="book-page book-page--story" data-page-id="forest" data-scene="forest" aria-hidden="true" inert>
+          <div class="book-spread book-spread--reverse">
+            <div class="illustration-leaf"><img src="assets/story-2.jpg" alt="木漏れ日の森を歩くぷくともち" loading="lazy"><button class="scene-touch" type="button" data-effect="bird" aria-label="鳥を呼ぶ">♪</button></div>
+            <div class="story-leaf"><span class="chapter-number">02</span><p class="scene-label">もり</p><h2 data-page-title tabindex="-1">カサッ！ なにかいた！</h2><p>ぷくは音を追いかけ、<br>もちは木漏れ日を見上げます。</p><span class="page-doodle page-doodle--bird" aria-hidden="true">⌁　♪</span></div>
+          </div>
+        </article>
+
+        <article class="book-page book-page--story" data-page-id="river" data-scene="river" aria-hidden="true" inert>
+          <div class="book-spread">
+            <div class="illustration-leaf"><img src="assets/story-3.jpg" alt="きらきらした川を渡るぷくともち" loading="lazy"><span class="river-shimmer" aria-hidden="true"></span><button class="scene-touch" type="button" data-effect="river" aria-label="川に触れる">○</button></div>
+            <div class="story-leaf"><span class="chapter-number">03</span><p class="scene-label">かわ</p><h2 data-page-title tabindex="-1">いしから いしへ！</h2><p>ぴょんぴょん進むぷく。<br>もちは一歩ずつ、ちゃぷり。</p><p class="sound-word" aria-hidden="true">ぴょん　ちゃぷり</p></div>
+          </div>
+        </article>
+
+        <article class="book-page book-page--story" data-page-id="slope" data-scene="slope" aria-hidden="true" inert>
+          <div class="book-spread book-spread--reverse">
+            <div class="illustration-leaf illustration-leaf--slope"><img src="assets/story-4.jpg" alt="急な岩場を登るぷくともち" loading="lazy"><button class="scene-touch" type="button" data-effect="pebble" aria-label="小石を転がす">●</button></div>
+            <div class="story-leaf"><span class="chapter-number">04</span><p class="scene-label">きゅうな さか</p><h2 data-page-title tabindex="-1">よいしょ、よいしょ</h2><p>ぷくはどんどん上へ。<br>もちの「まって〜」が山に響きます。</p><span class="page-doodle" aria-hidden="true">▲　▲　▲</span></div>
+          </div>
+        </article>
+
+        <article class="book-page book-page--story" data-page-id="rest" data-scene="rest" aria-hidden="true" inert>
+          <div class="book-spread">
+            <div class="illustration-leaf"><img src="assets/story-5.jpg" alt="岩の上で休憩するもちと待っているぷく" loading="lazy"><button class="scene-touch" type="button" data-effect="wind" aria-label="風を起こす">〜</button></div>
+            <div class="story-leaf"><span class="chapter-number">05</span><p class="scene-label">きゅうけい</p><h2 data-page-title tabindex="-1">ここ、すわりごこち まる！</h2><p>もちが座ると、ぷくもとなりで<br>雲を数えました。</p><p class="sound-word sound-word--sleep" aria-hidden="true">すぅ…　Z z</p></div>
+          </div>
+        </article>
+
+        <article class="book-page book-page--story" data-page-id="snack" data-scene="snack" aria-hidden="true" inert>
+          <div class="book-spread book-spread--reverse">
+            <div class="illustration-leaf"><img src="assets/story-6.jpg" alt="山でおにぎりを食べるぷくともち" loading="lazy"><button class="scene-touch" type="button" data-effect="snack" aria-label="おにぎりをきらめかせる">🍙</button></div>
+            <div class="story-leaf"><span class="chapter-number">06</span><p class="scene-label">おにぎり</p><h2 data-page-title tabindex="-1">いちばんの ごちそう！</h2><p>たくさん歩いたあとのおにぎりは、<br>いつもより大きな味。</p><p class="character-note"><b>ぷく</b>「もう ひとつ！」<br><b>もち</b>「まずは ひとやすみ」</p></div>
+          </div>
+        </article>
+
+        <article class="book-page book-page--story" data-page-id="summit" data-scene="summit" aria-hidden="true" inert>
+          <div class="book-spread">
+            <div class="illustration-leaf illustration-leaf--summit"><img src="assets/story-7.jpg" alt="山頂でよろこぶぷくともち" loading="lazy"><button class="scene-touch" type="button" data-effect="cheer" aria-label="山びこを起こす">!</button></div>
+            <div class="story-leaf"><span class="chapter-number">07</span><p class="scene-label">ちょうじょう</p><h2 data-page-title tabindex="-1">やったー！</h2><p>速さはちがっても、着いたのは<br>ふたりいっしょです。</p><p class="sound-word" aria-hidden="true">やっほー！</p></div>
+          </div>
+        </article>
+
+        <article class="book-page book-page--story book-page--sunset" data-page-id="sunset" data-scene="sunset" aria-hidden="true" inert>
+          <div class="book-spread book-spread--reverse">
+            <div class="illustration-leaf illustration-leaf--sunset"><img src="assets/story-8.jpg" alt="夕焼けを並んで見るぷくともち" loading="lazy"><button class="scene-touch" type="button" data-effect="sunset" aria-label="夕空をきらめかせる">♥</button></div>
+            <div class="story-leaf"><span class="chapter-number">08</span><p class="scene-label">ゆうやけ</p><h2 data-page-title tabindex="-1">あしたも きれいかな</h2><p>帰る前に、空が紫になるまで<br>ふたりで並んで眺めました。</p><span class="page-doodle page-doodle--sunset" aria-hidden="true">♥　✦　♥</span></div>
+          </div>
+        </article>
+
+        <article class="book-page book-page--ending" data-page-id="ending" data-scene="sunset" aria-hidden="true" inert>
+          <img class="ending-art" src="assets/ending.jpg" alt="夕焼けの山頂で、ぷくともちが並んで座っている" loading="lazy">
+          <div class="ending-shade" aria-hidden="true"></div>
+          <div class="ending-copy"><p>きょうも いっぱい あるいたね。</p><h2 data-page-title tabindex="-1"><span>また いっしょに</span><span>いこう。</span></h2><div class="ending-actions"><button class="paper-button" id="album-open" type="button">おもいでを みる</button><button class="paper-button paper-button--quiet" type="button" data-go-page="cover">さいしょから ↺</button></div></div>
+        </article>
+      </div>
+
+      <nav class="book-controls" id="book-controls" aria-label="絵本のページ送り">
+        <button class="page-button page-button--prev" id="page-prev" type="button" aria-label="前のページへ"><span aria-hidden="true">←</span> 前へ</button>
+        <div class="page-progress"><span id="page-status" aria-live="polite">1 / 11</span><span class="page-dots" id="page-dots" aria-hidden="true"></span></div>
+        <button class="page-button page-button--next" id="page-next" type="button" aria-label="次のページへ">次へ <span aria-hidden="true">→</span></button>
+      </nav>
+      <p class="sr-only" id="page-announcement" aria-live="polite"></p>
+      <p class="sr-only" id="scene-reaction" aria-live="polite"></p>
+    </main>
+  </div>
+
+  <dialog class="album-dialog" id="album-dialog" aria-labelledby="album-title">
+    <div class="album-dialog__header"><div><small>おまけ</small><h2 id="album-title">おもいで アルバム</h2></div><button class="dialog-close" type="button" aria-label="アルバムを閉じる">×</button></div>
+    <div class="album-dialog__layout">
+      <div class="album-preview"><img id="dialog-image" src="assets/story-2.jpg" alt=""><div><span id="dialog-count"></span><h3 id="dialog-title"></h3><p id="dialog-description"></p></div></div>
+      <div class="album-thumbnails" aria-label="思い出を選ぶ">
+        <button type="button" data-album-index="0"><img src="assets/story-2.jpg" alt="森を歩いた思い出" loading="lazy"><span>森</span></button>
+        <button type="button" data-album-index="1"><img src="assets/story-3.jpg" alt="川を渡った思い出" loading="lazy"><span>川</span></button>
+        <button type="button" data-album-index="2"><img src="assets/story-5.jpg" alt="山で休憩した思い出" loading="lazy"><span>休憩</span></button>
+        <button type="button" data-album-index="3"><img src="assets/story-6.jpg" alt="おにぎりを食べた思い出" loading="lazy"><span>おにぎり</span></button>
+        <button type="button" data-album-index="4"><img src="assets/story-7.jpg" alt="山頂に着いた思い出" loading="lazy"><span>頂上</span></button>
+        <button type="button" data-album-index="5"><img src="assets/story-8.jpg" alt="夕焼けを眺めた思い出" loading="lazy"><span>夕焼け</span></button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="sound.js?v=storybook-1"></script>
+  <script src="app.js?v=storybook-1"></script>
+</body>
+</html>
