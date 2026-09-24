@@ -7,9 +7,9 @@
   let context;
   let master;
   let windGain;
-  let riverGain;
+  let waveGain;
   let enabled = false;
-  let currentScene = "departure";
+  let currentScene = "shore";
   let birdTimer;
   let lastStep = 0;
 
@@ -43,11 +43,11 @@
     master.connect(context.destination);
 
     windGain = context.createGain();
-    riverGain = context.createGain();
+    waveGain = context.createGain();
     windGain.gain.value = 0;
-    riverGain.gain.value = 0;
+    waveGain.gain.value = 0;
     createNoiseLoop("lowpass", 620).connect(windGain).connect(master);
-    createNoiseLoop("bandpass", 1350).connect(riverGain).connect(master);
+    createNoiseLoop("bandpass", 1350).connect(waveGain).connect(master);
   }
 
   function ramp(param, value, duration = .7) {
@@ -59,10 +59,10 @@
 
   function applySceneSound() {
     if (!context) return;
-    const isRiver = currentScene === "river";
-    const isWindy = ["slope", "summit", "sunset"].includes(currentScene);
-    ramp(windGain.gain, enabled ? (isWindy ? .12 : .052) : 0);
-    ramp(riverGain.gain, enabled ? (isRiver ? .15 : .012) : 0);
+    const isWaveScene = ["shore", "waves", "sunset", "night"].includes(currentScene);
+    const isUnderwater = currentScene === "underwater";
+    ramp(windGain.gain, enabled ? (currentScene === "night" ? .035 : .065) : 0);
+    ramp(waveGain.gain, enabled ? (isWaveScene ? .15 : isUnderwater ? .055 : .015) : 0);
   }
 
   function chirp() {
@@ -116,7 +116,7 @@
     window.clearInterval(birdTimer);
     if (!enabled) return;
     birdTimer = window.setInterval(() => {
-      if (["departure", "forest", "rest"].includes(currentScene)) chirp();
+      if (["shore", "sunset"].includes(currentScene)) chirp();
     }, 7200);
   }
 
@@ -126,7 +126,7 @@
     if (context.state === "suspended") await context.resume();
     enabled = !enabled;
     toggle.setAttribute("aria-pressed", String(enabled));
-    toggle.setAttribute("aria-label", enabled ? "山の音をオフにする" : "山の音をオンにする");
+    toggle.setAttribute("aria-label", enabled ? "海の音をオフにする" : "海の音をオンにする");
     toggle.querySelector("b").textContent = enabled ? "おと ON" : "おと OFF";
     ramp(master.gain, enabled ? .7 : 0, .45);
     applySceneSound();
