@@ -1,26 +1,5 @@
 "use strict";
 
-const SCENES = {
-  shore: { reaction: "しおかぜが ふわり。" },
-  waves: { reaction: "なみが ぱしゃん！" },
-  underwater: { reaction: "あわが ぷくぷく。" },
-  sunset: { reaction: "ゆうぞらが きらり。" },
-  night: { reaction: "ほしが きらり。" }
-};
-
-const EFFECTS = {
-  breeze: ["〜", "﹏", "〜"],
-  sparkle: ["✦", "·", "✧"],
-  splash: ["○", "◌", "°"],
-  shell: ["🐚", "✦", "·"],
-  castle: ["★", "✦", "·"],
-  bubbles: ["○", "◌", "°"],
-  turtle: ["♡", "○", "✦"],
-  picnic: ["🍙", "✦", "♡"],
-  sunset: ["♥", "✦", "·"],
-  stars: ["★", "✦", "·"]
-};
-
 const ALBUM_ITEMS = [
   { image: "assets/sea-story-3.png", alt: "うみで あそぶ ぷくともち", title: "ぱしゃん！", description: "あおい みずのなかで、ふたりの わらいごえが なみより たかく はずみました。" },
   { image: "assets/sea-story-4.png", alt: "かいがらを みつけた ぷくともち", title: "すなはまの たからもの", description: "ひとつずつ ちがう いろと かたち。みみを すますと なみの おとが しました。" },
@@ -38,7 +17,6 @@ const nextButton = document.getElementById("page-next");
 const pageStatus = document.getElementById("page-status");
 const pageDots = document.getElementById("page-dots");
 const pageAnnouncement = document.getElementById("page-announcement");
-const reactionOutput = document.getElementById("scene-reaction");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 let currentPageIndex = 0;
 let transitionTimer = 0;
@@ -189,28 +167,6 @@ viewport.addEventListener("pointerup", (event) => {
   swipeStart = null;
   if (Math.abs(deltaX) < 48 || Math.abs(deltaX) <= Math.abs(deltaY) * 1.2) return;
   goToPage(currentPageIndex + (deltaX < 0 ? 1 : -1));
-});
-
-document.querySelectorAll(".scene-touch").forEach((button) => {
-  button.addEventListener("click", () => {
-    const effect = button.dataset.effect;
-    const imageArea = button.closest(".illustration-leaf");
-    const symbols = EFFECTS[effect];
-    for (let index = 0; index < 7; index += 1) {
-      const particle = document.createElement("span");
-      particle.className = "effect-particle";
-      particle.textContent = symbols[index % symbols.length];
-      particle.style.setProperty("--x", `${18 + Math.random() * 64}%`);
-      particle.style.setProperty("--y", `${48 + Math.random() * 34}%`);
-      particle.style.setProperty("--size", `${1 + Math.random() * 1.2}rem`);
-      particle.style.setProperty("--drift", `${-45 + Math.random() * 90}px`);
-      particle.style.setProperty("--spin", `${-25 + Math.random() * 50}deg`);
-      imageArea.appendChild(particle);
-      window.setTimeout(() => particle.remove(), 1450);
-    }
-    const sceneName = button.closest("[data-scene]").dataset.scene;
-    reactionOutput.textContent = SCENES[sceneName].reaction;
-  });
 });
 
 const dialog = document.getElementById("album-dialog");

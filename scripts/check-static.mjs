@@ -14,6 +14,25 @@ const sources = Object.fromEntries(
   siteFiles.map((file) => [file, fs.readFileSync(path.join(root, file), "utf8")]),
 );
 
+const dialogueCards = [...sources["index.html"].matchAll(/<p class="character-note">([\s\S]*?)<\/p>/g)];
+const invalidDialogueCards = dialogueCards.filter(([, markup]) => {
+  const dialogue = markup.replace(/<[^>]+>/g, "").replace(/ぷく|もち|\s/g, "");
+  return !dialogue.includes("「") || !dialogue.includes("」");
+});
+
+if (invalidDialogueCards.length) {
+  console.error(`Empty or incomplete dialogue cards found: ${invalidDialogueCards.length}`);
+  process.exit(1);
+}
+
+const removedSceneUiPattern = /(?:scene-touch|scene-reaction|effect-particle|data-effect|[♥♡])/;
+const removedSceneUiFiles = siteFiles.filter((file) => removedSceneUiPattern.test(sources[file]));
+
+if (removedSceneUiFiles.length) {
+  console.error(`Removed scene UI remains in: ${removedSceneUiFiles.join(", ")}`);
+  process.exit(1);
+}
+
 const localOnlyPattern = /(?:127\.0\.0\.1|localhost|file:\/\/)/i;
 const localOnlyFiles = siteFiles.filter((file) => localOnlyPattern.test(sources[file]));
 
