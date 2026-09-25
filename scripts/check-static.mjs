@@ -33,6 +33,14 @@ if (removedSceneUiFiles.length) {
   process.exit(1);
 }
 
+const removedDecorationPattern = /(?:floating-cloud|flying-birds|wave-shimmer|page-doodle|picture-breathe|cloud-drift|bird-fly|doodle-float|wave-flow|puku-idle|mochi-idle|quick-hop|sleepy-cycle|speech-pop)/;
+const removedDecorationFiles = siteFiles.filter((file) => removedDecorationPattern.test(sources[file]));
+
+if (removedDecorationFiles.length) {
+  console.error(`Removed animated decoration remains in: ${removedDecorationFiles.join(", ")}`);
+  process.exit(1);
+}
+
 const localOnlyPattern = /(?:127\.0\.0\.1|localhost|file:\/\/)/i;
 const localOnlyFiles = siteFiles.filter((file) => localOnlyPattern.test(sources[file]));
 
