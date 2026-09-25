@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
-const siteFiles = ["index.html", "styles.css", "app.js", "game.js", "sound.js"];
+const siteFiles = ["index.html", "styles.css", "app.js"];
 const missingSiteFiles = siteFiles.filter((file) => !fs.existsSync(path.join(root, file)));
 
 if (missingSiteFiles.length) {
@@ -32,7 +32,7 @@ for (const match of sources["styles.css"].matchAll(/url\((['"]?)([^'")]+)\1\)/g)
   references.add(match[2]);
 }
 
-for (const file of ["app.js", "game.js", "sound.js"]) {
+for (const file of ["app.js"]) {
   for (const match of sources[file].matchAll(/(['"])(assets\/[^'"]+)\1/g)) {
     references.add(match[2]);
   }

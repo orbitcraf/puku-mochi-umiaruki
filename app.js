@@ -1,11 +1,11 @@
 "use strict";
 
 const SCENES = {
-  shore: { reaction: "潮風が ふわり。" },
-  waves: { reaction: "波が ぱしゃん！" },
-  underwater: { reaction: "泡が ぷくぷく。" },
-  sunset: { reaction: "夕空が きらり。" },
-  night: { reaction: "星が きらり。" }
+  shore: { reaction: "しおかぜが ふわり。" },
+  waves: { reaction: "なみが ぱしゃん！" },
+  underwater: { reaction: "あわが ぷくぷく。" },
+  sunset: { reaction: "ゆうぞらが きらり。" },
+  night: { reaction: "ほしが きらり。" }
 };
 
 const EFFECTS = {
@@ -22,12 +22,12 @@ const EFFECTS = {
 };
 
 const ALBUM_ITEMS = [
-  { image: "assets/sea-story-3.png", alt: "海で遊ぶぷくともち", title: "ぱしゃん！", description: "青い水の中で、ふたりの笑い声が波より高くはずみました。" },
-  { image: "assets/sea-story-4.png", alt: "貝殻を見つけたぷくともち", title: "砂浜の 宝もの", description: "ひとつずつ違う色とかたち。耳をすますと波の音がしました。" },
-  { image: "assets/sea-story-5.png", alt: "砂のお城を作るぷくともち", title: "ふたりの おしろ", description: "高い塔も丸い壁も、力を合わせたら立派にできました。" },
-  { image: "assets/sea-story-7.png", alt: "ウミガメと泳ぐぷくともち", title: "こんにちは、かめさん", description: "海の中で出会った新しい友だちが、ゆっくり泳いでいきました。" },
-  { image: "assets/sea-story-8.png", alt: "浜辺でお弁当を食べるぷくともち", title: "潮風の おべんとう", description: "いっぱい遊んだあとのおにぎりは、いつもよりおいしい味。" },
-  { image: "assets/sea-story-9.png", alt: "夕日を見るぷくともち", title: "ふたりの ゆうひ", description: "オレンジ色の海を、ことばにしないで一緒に眺めました。" }
+  { image: "assets/sea-story-3.png", alt: "うみで あそぶ ぷくともち", title: "ぱしゃん！", description: "あおい みずのなかで、ふたりの わらいごえが なみより たかく はずみました。" },
+  { image: "assets/sea-story-4.png", alt: "かいがらを みつけた ぷくともち", title: "すなはまの たからもの", description: "ひとつずつ ちがう いろと かたち。みみを すますと なみの おとが しました。" },
+  { image: "assets/sea-story-5.png", alt: "すなのおしろを つくる ぷくともち", title: "ふたりの おしろ", description: "たかい とうも まるい かべも、ちからを あわせたら りっぱに できました。" },
+  { image: "assets/sea-story-7.png", alt: "ウミガメと およぐ ぷくともち", title: "こんにちは、かめさん", description: "うみのなかで であった あたらしい ともだちが、ゆっくり およいで いきました。" },
+  { image: "assets/sea-story-8.png", alt: "はまべで おべんとうを たべる ぷくともち", title: "しおかぜの おべんとう", description: "いっぱい あそんだあとの おにぎりは、いつもより おいしい あじ。" },
+  { image: "assets/sea-story-9.png", alt: "ゆうひを みる ぷくともち", title: "ふたりの ゆうひ", description: "オレンジいろの うみを、ことばに しないで いっしょに ながめました。" }
 ];
 
 const pages = [...document.querySelectorAll(".book-page")];
@@ -67,14 +67,10 @@ function updateNavigation() {
   previousButton.disabled = currentPageIndex === 0;
   nextButton.disabled = currentPageIndex === total - 1;
   pageStatus.textContent = `${currentPageIndex + 1} / ${total}`;
-  previousButton.setAttribute("aria-label", currentPageIndex > 0 ? `前のページ、${pageTitle(pages[currentPageIndex - 1])}へ` : "前のページはありません");
-  nextButton.setAttribute("aria-label", currentPageIndex < total - 1 ? `次のページ、${pageTitle(pages[currentPageIndex + 1])}へ` : "次のページはありません");
+  pageStatus.setAttribute("aria-label", `${currentPageIndex + 1}ページめ、ぜんぶで ${total}ページ`);
+  previousButton.setAttribute("aria-label", currentPageIndex > 0 ? `まえのページ、${pageTitle(pages[currentPageIndex - 1])}へ` : "まえのページは ありません");
+  nextButton.setAttribute("aria-label", currentPageIndex < total - 1 ? `つぎのページ、${pageTitle(pages[currentPageIndex + 1])}へ` : "つぎのページは ありません");
   [...pageDots.children].forEach((dot, index) => dot.classList.toggle("is-current", index === currentPageIndex));
-}
-
-function updateSceneSound() {
-  const scene = pages[currentPageIndex].dataset.scene || "shore";
-  window.bookSound?.setScene(scene);
 }
 
 function preloadNearbyImages(index) {
@@ -131,8 +127,6 @@ function goToPage(index, options = {}) {
   setPageAccessibility(index);
   updateNavigation();
   preloadNearbyImages(index);
-  updateSceneSound();
-
   if (options.history !== "none") updateUrl(index, options.history === "replace");
   pageAnnouncement.textContent = `${index + 1}ページ、${pageTitle(newPage)}`;
 
@@ -164,7 +158,6 @@ function initializeBook() {
   setPageAccessibility(initialIndex);
   updateNavigation();
   preloadNearbyImages(initialIndex);
-  updateSceneSound();
   if (window.location.hash !== `#page-${pages[initialIndex].dataset.pageId}`) updateUrl(initialIndex, true);
 }
 
@@ -217,9 +210,6 @@ document.querySelectorAll(".scene-touch").forEach((button) => {
     }
     const sceneName = button.closest("[data-scene]").dataset.scene;
     reactionOutput.textContent = SCENES[sceneName].reaction;
-    if (["sparkle", "turtle", "sunset"].includes(effect)) window.bookSound?.chirp();
-    if (["splash", "bubbles"].includes(effect)) window.bookSound?.splash();
-    if (["breeze", "castle"].includes(effect)) window.bookSound?.step();
   });
 });
 
