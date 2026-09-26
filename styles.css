@@ -196,7 +196,7 @@ img { display: block; max-width: 100%; -webkit-user-drag: none; user-select: non
   .page-dots { gap: 3px; }
   .page-dots i { width: 5px; height: 5px; }
   .page-dots i.is-current { width: 16px; }
-  .page-button { min-width: 0; width: min(100%, 112px); min-height: 48px; padding: 5px 13px; border-width: 3px; border-radius: 15px; box-shadow: 0 4px var(--navy); white-space: nowrap; }
+  .page-button { min-width: 96px; min-height: 48px; padding: 5px 13px; border-width: 3px; border-radius: 15px; box-shadow: 0 4px var(--navy); white-space: nowrap; }
   .book-page.is-entering-next { animation-name: mobile-in-next; transform-origin: center; }
   .book-page.is-leaving-next { animation-name: mobile-out-next; transform-origin: center; }
   .book-page.is-entering-prev { animation-name: mobile-in-prev; transform-origin: center; }
@@ -214,7 +214,7 @@ img { display: block; max-width: 100%; -webkit-user-drag: none; user-select: non
   .story-leaf > p:not(.scene-label) { font-size: clamp(.88rem, 3.4vw, 1.05rem); line-height: 1.55; }
   .character-note { margin-top: 9px !important; padding: 6px 10px; border-left-width: 4px; font-size: .82rem !important; }
   .onomatopoeia { margin-top: 10px !important; font-size: 1.25rem !important; }
-  .cover-art { top: 8%; bottom: auto; height: 76%; object-position: 78% center; }
+  .cover-art { top: 7%; bottom: auto; height: 86%; object-position: 74% center; }
   .cover-shade { background: linear-gradient(180deg, rgba(33,181,235,.7), transparent 68%), linear-gradient(90deg, rgba(26,143,210,.46), transparent 78%); }
   .cover-copy { left: 20px; right: 20px; top: 11%; width: auto; transform: none; }
   .cover-copy h1 { font-size: clamp(3.8rem, 18vw, 6.2rem); }
@@ -240,6 +240,7 @@ img { display: block; max-width: 100%; -webkit-user-drag: none; user-select: non
 
 @media (max-width: 520px) {
   .book-controls { grid-template-columns: minmax(78px, 1fr) auto minmax(78px, 1fr); }
+  .page-button { min-width: 88px; }
   .page-progress { min-width: 76px; }
   .cover-copy h1 { font-size: clamp(3.5rem, 17vw, 5.2rem); }
   .cover-eyebrow { font-size: 1.45rem; }
@@ -260,8 +261,7 @@ img { display: block; max-width: 100%; -webkit-user-drag: none; user-select: non
 @media (max-width: 480px) {
   .book-controls { min-height: 64px; grid-template-columns: minmax(78px, 1fr) auto minmax(78px, 1fr); gap: 8px; padding: 4px max(9px, env(safe-area-inset-left)) max(4px, env(safe-area-inset-bottom)) max(9px, env(safe-area-inset-right)); }
   .page-button {
-    width: min(100%, 92px);
-    min-width: 0;
+    min-width: 76px;
     min-height: 44px;
     padding: 3px 9px;
     border-radius: 13px;
